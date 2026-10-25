@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustVault | Secure Login</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            min-height: 100vh;
+            font-family: Inter, Arial, sans-serif;
+            background: radial-gradient(circle at top left, #29245d, #0b1020 55%);
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+        .layout {
+            width: 100%;
+            max-width: 980px;
+            display: grid;
+            grid-template-columns: 1fr 390px;
+            gap: 50px;
+            align-items: center;
+        }
+        .brand h1 { font-size: 42px; margin: 18px 0; }
+        .brand h1 span { color: #a78bfa; }
+        .brand p { color: #b7c0d4; line-height: 1.8; max-width: 440px; }
+        .pill {
+            display: inline-block;
+            border: 1px solid #6554a7;
+            color: #d8ccff;
+            padding: 9px 13px;
+            border-radius: 30px;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+        .features { margin-top: 28px; color: #d6d9e6; line-height: 2.4; }
+        .card {
+            background: rgba(22, 28, 49, 0.94);
+            border: 1px solid #343d5c;
+            border-radius: 22px;
+            padding: 32px;
+            box-shadow: 0 24px 70px #0005;
+        }
+        .card h2 { font-size: 27px; margin-bottom: 9px; }
+        .sub { color: #aab3c8; font-size: 14px; margin-bottom: 26px; }
+        label { display: block; margin: 18px 0 8px; font-size: 13px; color: #dbe2f1; }
+        input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            border: 1px solid #414b68;
+            background: #10172a;
+            color: white;
+            outline: none;
+        }
+        input:focus { border-color: #a78bfa; }
+        button {
+            width: 100%;
+            margin-top: 24px;
+            padding: 14px;
+            border: 0;
+            border-radius: 10px;
+            background: linear-gradient(100deg, #7c3aed, #5b5ce2);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        button:hover { opacity: .9; }
+        .links { text-align: center; margin-top: 22px; font-size: 13px; color: #aab3c8; line-height: 2; }
+        a { color: #c4b5fd; text-decoration: none; }
+        .message { background: #42232f; color: #fecdd3; padding: 10px; border-radius: 8px; margin-bottom: 12px; font-size: 13px; }
+        .secure { color: #91e6c0; font-size: 12px; margin-top: 20px; text-align: center; }
+        @media(max-width: 720px) {
+            .layout { grid-template-columns: 1fr; max-width: 430px; gap: 28px; }
+            .brand h1 { font-size: 34px; }
+            .features { display: none; }
+            .card { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+    <main class="layout">
+        <section class="brand">
+            <div class="pill">● SECURE DOCUMENT PLATFORM</div>
+            <h1>Welcome to<br><span>TrustVault.</span></h1>
+            <p>One secure space for your documents. Manage access, identify sensitive information, and keep track of important document activity.</p>
+            <div class="features">
+                <div>✓ Secure account access</div>
+                <div>✓ Document risk insights</div>
+                <div>✓ Activity and audit tracking</div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Sign in</h2>
+            <p class="sub">Access your secure workspace.</p>
+
+            {% for message in get_flashed_messages() %}
+                <div class="message">{{ message }}</div>
+            {% endfor %}
+
+            <form method="POST" action="{{ url_for('login') }}">
+                <label for="email">Email address</label>
+                <input id="email" type="email" name="email" placeholder="you@example.com" required autocomplete="email">
+
+                <label for="password">Password</label>
+                <input id="password" type="password" name="password" placeholder="Enter your password" required autocomplete="current-password">
+
+                <button type="submit">Sign in securely →</button>
+            </form>
+
+            <div class="links">
+                New to TrustVault?<br>
+                <a href="{{ url_for('register') }}">Create an account</a>
+                <br><a href="{{ url_for('home') }}">Back to home</a>
+            </div>
+            <div class="secure">🔒 Your workspace is protected</div>
+        </section>
+    </main>
+</body>
+</html>
